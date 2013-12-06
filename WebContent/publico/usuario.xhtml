@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/templates/interna.xhtml">
+	
+	<ui:define name="titulo">
+	</ui:define>
+	
+	<ui:define name="corpo">
+	<h1>Cadastro</h1>
+	
+	<h:form id="cadastro">
+		
+		<p:growl />
+		
+		<h:inputHidden value="#{usuarioBean.usuario.codigo}"/> 
+		<h:inputHidden value="#{usuarioBean.usuario.ativo}"/>
+		<h:inputHidden value="#{usuarioBean.destinoSalvar}"/>
+					
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel value="Nome:" for="nome"/>
+			<h:panelGroup>
+				<h:inputText id="nome" label="Nome" value="#{usuarioBean.usuario.nome}" size="30" maxlength="30" required="true" 
+				requiredMessage="Campo Nome é OBRIGATORIO" validatorMessage="O nome deve conter no minimo 10 caracters">
+					<f:validateLength minimum="10" maximum="30" for="nome" />
+				</h:inputText>
+			</h:panelGroup>
+				
+			
+			<h:outputLabel value="Curso" for="curso" />
+			<h:panelGroup>
+				<h:selectOneMenu id="curso" value="#{usuarioBean.usuario.curso}" required="true" requiredMessage="Campo Curso é OBRIGATORIO">
+					<f:selectItem itemLabel="Selecione" itemValue=""/>
+					<f:selectItem itemValue="Sistemas de Imformação" itemLabel="Sistemas de Imformação"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+			
+			
+			<h:outputLabel value="Periodo" for="periodo" />
+			<h:panelGroup>
+				<h:selectOneMenu id="periodo" value="#{usuarioBean.usuario.periodo}" required="true" requiredMessage="Campo Periodo é OBRIGATORIO">
+					<f:selectItem itemLabel="Selecione" itemValue=""/>
+					<f:selectItem itemValue="1" itemLabel="1º"/>
+					<f:selectItem itemValue="2" itemLabel="2º"/>
+					<f:selectItem itemValue="3" itemLabel="3º"/>
+					<f:selectItem itemValue="4" itemLabel="4º"/>
+					<f:selectItem itemValue="5" itemLabel="5º"/>
+					<f:selectItem itemValue="6" itemLabel="6º"/>
+					<f:selectItem itemValue="7" itemLabel="7º"/>
+					<f:selectItem itemValue="8" itemLabel="8º"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Endereço" for="endereco" />
+			<h:panelGroup>
+				<h:inputText id="endereco" value="#{usuarioBean.usuario.endereco}" required="true" requiredMessage="Campo Endereço é OBRIGATORIO"/>
+			</h:panelGroup>
+			
+			
+			<h:outputLabel value="Cidade" for="cidade" />
+			<h:panelGroup>
+				<h:inputText id="cidade" value="#{usuarioBean.usuario.cidade}" required="true" requiredMessage="Campo Cidade é OBRIGATORIO"/>
+			</h:panelGroup>
+			
+			
+			<h:outputLabel value="UF" for="uf" />
+			<h:panelGroup>
+				<h:inputText id="uf" value="#{usuarioBean.usuario.uf}" required="true" requiredMessage="Campo UF é OBRIGATORIO"/>
+			</h:panelGroup>
+			
+			
+			<h:outputLabel value="CEP" for="cep" />
+			<h:panelGroup>
+				<h:inputText id="cep" value="#{usuarioBean.usuario.cep}" required="true" maxlength="8" size="8" requiredMessage="Campo CEP é OBRIGATORIO"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="e-Mail:" for="email"/>
+			<h:panelGroup>
+				<h:inputText id="email" 
+					label="e-Mail" 
+					value="#{usuarioBean.usuario.email}" 
+					size="50" maxlength="50" required="true" 
+					validatorMessage="e-Mail inválido" requiredMessage="Campo EMAIL é OBRIGATORIO">
+					<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-]+[a-zA-Z]+\.[a-zA-Z]+(\.[a-zA-Z]+){0,1}"/> 
+				</h:inputText>
+			</h:panelGroup>
+			
+			<h:outputLabel value="RA" for="ra" />
+			<h:panelGroup>
+				<h:inputText value="#{usuarioBean.usuario.ra}" id="ra" size="10" maxlength="4" required="true" 
+					requiredMessage="Campo RA é OBRIGATORIO" validatorMessage="O RA deve conter 4 digitos, somente numeros">
+					<f:validateLength minimum="4" maximum="4" />
+				</h:inputText>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Senha:" for="senha"/> 
+			<h:panelGroup>
+				<h:inputSecret id="senha" label="Senha" value="#{usuarioBean.usuario.senha}" size="10" maxlength="10" required="true" redisplay="true" requiredMessage="Campo Senha é OBRIGATORIO"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Confirmar Senha:" for="confirmarsenha"/>
+			<h:panelGroup>
+				<h:inputSecret id="confirmarsenha" label="Confirmar Senha" value="#{usuarioBean.confirmarSenha}" size="10" maxlength="10" required="true" redisplay="true" requiredMessage="Campo Confimar Senha é OBRIGATORIO"/>
+			</h:panelGroup>
+		
+		</h:panelGrid>
+		
+		<h:commandButton action="#{usuarioBean.salvar}" value="Salvar"/>
+		
+		<br /><hr />
+	</h:form>
+	
+	<h:form>
+		<a href="/AtividadesWeb">Voltar</a>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

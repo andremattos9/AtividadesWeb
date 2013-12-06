@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:util="http://java.sun.com/jsf/composite/components/util"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/templates/principal.xhtml">
+
+	<ui:define name="titulo">
+	</ui:define>
+
+	<ui:define name="corpo">
+		
+		<h1>Principal</h1>
+		<br />
+		<h:form>
+		<h:panelGrid columns="1">
+		
+		<h4>Ola  #{contextoBean.usuarioLogado.nome}, voce ja completou:	#{atividadeBean.totalApoveitamento}
+				das 200 horas necessarias.</h4>
+				
+			<br />	
+			<h:commandLink action="#{usuarioBean.editar}" value="Editar meu Cadastro">
+				<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{contextoBean.usuarioLogado}"/>
+				<f:setPropertyActionListener target="#{usuarioBean.destinoSalvar}" value="/admin/principal"/>
+			</h:commandLink>	
+			<br />
+			
+			<a href="#" onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+							title="Sair" >Sair</a>
+			
+		</h:panelGrid>
+		</h:form>	
+	</ui:define>
+</ui:composition>
+</html>

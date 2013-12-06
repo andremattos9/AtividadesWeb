@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+<ui:composition>
+	<sec:ifAnyGranted roles="ROLE_USUARIO">
+		<h:form id="menu">
+			<div id="menu">
+				<ul>
+					<sec:ifAnyGranted roles="ROLE_ADMINISTRADOR">
+						<li><h:commandLink value="Administrativo" action="/admin/administrativo" /></li>
+					</sec:ifAnyGranted>
+					
+						<li><h:commandLink value="Principal" action="/restrito/principal" /></li>
+						<li><h:commandLink value="Atividades" action="/restrito/atividades" /></li>
+						<li><a href="#" onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+							title="Sair" >Sair</a></li>
+					
+				</ul>
+			</div>
+		</h:form>
+		
+	</sec:ifAnyGranted>
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+	Administrativo
+	</ui:define>
+	
+	<ui:define name="corpo">
+	<h:form>
+	<h:messages/>
+	<h:dataTable value="#{usuarioBean.lista}" var="usuario" rules="rows" cellpadding="5" style="width: 100%; height: 100%">
+		<f:facet name="caption"> <!-- (1) -->
+				A listagem abaixo exibe a relação de todos os usuários do sistema. Você poderá realizar ativação e desativação, edição e exclusão para os usuários.
+		</f:facet>
+		<f:facet name="header">Listagem de Usuários</f:facet> <!-- (2) -->
+		<f:facet name="footer">Final da listagem</f:facet> <!-- (3) -->
+		<h:column>
+			<h:commandLink action="#{usuarioBean.ativar}" title="Ativar/Desativar" > <!-- (4) -->
+				<h:graphicImage library="imagens" name="usuario_ativo_#{usuario.ativo}.png" style="border:0"/>  <!-- (5) -->
+				<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}"/>  <!-- (6) -->
+			</h:commandLink>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Código</f:facet>
+			#{usuario.codigo}
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			#{usuario.nome}
+		</h:column>
+		<h:column>
+			<f:facet name="header">RA</f:facet>
+			#{usuario.ra}
+		</h:column>
+		<h:column>
+			<f:facet name="header">e-Mail</f:facet>
+			<a href="mailto:#{usuario.email}">#{usuario.email}</a>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Permissões</f:facet>
+			<h:commandLink action="#{usuarioBean.atribuiPermissao(usuario, 'ROLE_ADMINISTRADOR')}" title="Permissão Administrador"> 
+				<h:graphicImage library="imagens" name="ROLE_ADMINISTRADOR_#{usuario.permissao.contains('ROLE_ADMINISTRADOR')}.png" style="border:0"/>
+			</h:commandLink>
+		</h:column>
+		<h:column>
+			<h:commandLink action="#{usuarioBean.editar}">  <!-- (8) -->
+				<h:graphicImage library="imagens" name="editar16.png" style="border:0" title="Editar"/>
+				<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}"/>
+				<f:setPropertyActionListener target="#{usuarioBean.destinoSalvar}" value="/admin/principal"/>
+			</h:commandLink>
+		</h:column>
+		<h:column>  <!-- (9) -->
+			<h:commandLink action="#{usuarioBean.excluir}" onclick="if (!confirm('Confirma a exclusão do usuário #{usuario.nome}?')) return false;">
+				<h:graphicImage library="imagens" name="excluir16.png" style="border:0" title="Excluir"/>
+				<f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}"/>
+			</h:commandLink>
+		</h:column>
+	</h:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>
