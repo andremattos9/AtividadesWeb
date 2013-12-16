@@ -1,8 +1,6 @@
 AtividadesWeb
 =============
 
-Teste
-
 Codigo Fonte de Trabalho de Conclusão de Curso
 
 Desenvolvimento Java Web
